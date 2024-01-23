@@ -1,10 +1,18 @@
+# for this task we must have Vue.js installed: npm install -g @vue/cli
+# (if it is runned in powershell it will ask for changing the policy for running scripts)
+vue init browserify MyWebSite
+cd MyWebSite
+
+# Create a Dockerfile and proceed to the next commands
+
 # build the image
 docker build -t chebishev/vue_app:latest .
 
 # run the image in container
 docker run -d -p 8080:8080 chebishev/vue_app:latest
 
-# the app is running on http://localhost:8080
+# Run the app
+http://localhost:8080
 
 # push the image to dockerHub
 docker push chebishev/vue_app:latest
