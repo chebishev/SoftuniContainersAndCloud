@@ -2,15 +2,32 @@
 docker network create my_network
 
 # Add MySQL Container to Network
-docker run -dit --name wordpress_db -e MYSQL_DATABASE=wordpressdb -e MYSQL_ROOT_PASSWORD=wordpressdbpass -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress --expose 3306 --expose 33060 --network my_network -v ${PWD}/data:/var/lib/mysql mysql
+docker run -dit `
+--name wordpress_db `
+-e MYSQL_DATABASE=wordpressdb `
+-e MYSQL_ROOT_PASSWORD=wordpressdbpass `
+-e MYSQL_USER=wordpress `
+-e MYSQL_PASSWORD=wordpress `
+--expose 3306 `
+--expose 33060 `
+--network my_network `
+-v ${PWD}/data:/var/lib/mysql mysql
 
 # Inspect Network
 docker network inspect my_network
 
 # Add WordPress Container to Network
-docker run -dit --name wordpress-website -e WORDPRESS_DB_HOST=wordpress_db -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpressdb -p 80:80 --network my_network -v ${PWD}/wp-data:/var/www/html wordpress
+docker run -dit `
+--name wordpress-website `
+-e WORDPRESS_DB_HOST=wordpress_db `
+-e WORDPRESS_DB_USER=wordpress `
+-e WORDPRESS_DB_PASSWORD=wordpress `
+-e WORDPRESS_DB_NAME=wordpressdb `
+-p 80:80 `
+--network my_network `
+-v ${PWD}/wp-data:/var/www/html wordpress
 
-# Inspect Network
+# Inspect Network (Just check if the network is the same and it contains 2 containers)
 docker network inspect my_network
 
 # Run the App
