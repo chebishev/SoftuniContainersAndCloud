@@ -1,0 +1,21 @@
+# first create network
+docker network create mariadb
+
+# create mariadb server
+docker run --detach --network mariadb `
+--name mariadb-server `
+--env MARIADB_USER=mariadbuser `
+--env MARIADB_PASSWORD=mariadbpassword `
+--env MARIADB_ROOT_PASSWORD=mariadbrootpassword `
+--env MARIADB_DATABASE=client_test mariadb:latest
+
+# create mariadb client
+docker run -it --network mariadb `
+--rm mariadb mariadb `
+--host mariadb-server `
+--user mariadbuser `
+--password `
+--database client_test -p
+
+# for test:
+SELECT VERSION();
