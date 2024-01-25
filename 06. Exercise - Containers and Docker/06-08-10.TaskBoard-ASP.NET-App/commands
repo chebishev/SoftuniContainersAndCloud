@@ -1,0 +1,8 @@
+# Open the project in Visual Studio
+# Right click on Taskboard.WebApp -> Add -> Docker Support -> Linux
+
+# build the image from the generated dockerfile
+docker build -t chebishev/taskboard:latest .
+
+# push the image to docker hub
+docker push chebishev/taskboard:latest

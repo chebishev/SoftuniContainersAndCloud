@@ -1,0 +1,8 @@
+# build the image from dockerfile
+docker build -t chebishev/trackerapp:latest .
+
+# push the image to docker hub
+docker push chebishev/trackerapp:latest
+
+# run the image to test the VueApp:
+docker run -d -p 80:80 chebishev/trackerapp
