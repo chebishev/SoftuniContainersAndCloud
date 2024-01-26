@@ -24,3 +24,6 @@ docker network connect express-mongo backend
 
 # run the container
 docker start backend
+
+# open frontend in browser
+http://localhost:3000

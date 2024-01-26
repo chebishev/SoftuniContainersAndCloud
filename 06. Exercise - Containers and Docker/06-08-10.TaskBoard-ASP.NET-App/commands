@@ -6,3 +6,23 @@ docker build -t chebishev/taskboard:latest .
 
 # push the image to docker hub
 docker push chebishev/taskboard:latest
+
+# create docker-compose file
+
+# build it
+docker compose build
+
+# run it
+docker compose up
+
+# test it
+http://localhost:5000
+
+# For debug change in Dockerfile "Release" to "Debug"
+# open Visual Studio -> Debug -> Attach to Process
+# Connection type: Docker (Linux container)
+# Connection target: Find -> web_app (from containers) -> Attach
+# insert breakpoint and see if it will be hit
+
+# for removing all connected data:
+docker compose down --rmi all --volumes
