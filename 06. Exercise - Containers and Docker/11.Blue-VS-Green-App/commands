@@ -1,0 +1,13 @@
+# fill in the docker files in "vote" and "worker" apps
+# create docker-compose file
+# build the project
+docker-compose build
+
+# run it:
+docker-compose up
+
+# voting link
+http://localhost:5000
+
+# results link
+http://localhost:5001
