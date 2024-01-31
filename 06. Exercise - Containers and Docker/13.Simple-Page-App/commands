@@ -1,0 +1,7 @@
+# create dockerfile
+# create docker-compose
+docker-compose build
+docker-compose up -d
+
+# access the app on
+http://localhost:8000

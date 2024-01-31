@@ -1,0 +1,29 @@
+# install Java JDK
+winget install Oracle.JDK.21
+
+# check if it is working:
+java --version
+
+# install maven (download the binary from https://maven.apache.org/download.cgi, unzip it and add it to the path).
+# if it is in program files give the path to "C:\Program Files\apache-maven-3.9.6\bin" and add it to System Variables
+# check if it working:
+mvn --version
+
+# create the jar
+mvn clean package
+# or 
+mvn clean package -DskipTests
+
+# create Dockerfile
+# build the image
+docker build -t resellerapp .
+
+# create docker-compose
+# build the image
+docker-compose build
+
+# run the image
+docker-compose up -d
+
+# access the app
+http://localhost:8080
