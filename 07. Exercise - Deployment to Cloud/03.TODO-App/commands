@@ -1,0 +1,5 @@
+# create web app + database
+# create resource group with WestEurope, Node 18 LTS, MongoDB
+# copy the database name (something in format: "chebishevtodoapp-database")
+# add this app to GitHub in order to use Azure GitHub Deploy
+# Set the database options in the app Configuration (DATABASE_NAME, DATABASE_URI/URL)
