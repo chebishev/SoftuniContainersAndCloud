@@ -1,5 +1,6 @@
-# create web app + database
-# create resource group with WestEurope, Node 18 LTS, MongoDB
-# copy the database name (something in format: "chebishevtodoapp-database")
-# add this app to GitHub in order to use Azure GitHub Deploy
-# Set the database options in the app Configuration (DATABASE_NAME, DATABASE_URI/URL)
+# create repo in GitHub
+# upload the content of 03.TODO-App in the repo
+# Create new resource in Azure with Node 18 LTS, MongoDB + Compass, WestEurope, resource group etc
+# after the app service is created, go to Configurations and add DATABASE_NAME as new application setting
+# wait for connection string to appear in the Configurations page
+# copy mongodb://.... and add it as value to new application setting: MONGODB_URL
