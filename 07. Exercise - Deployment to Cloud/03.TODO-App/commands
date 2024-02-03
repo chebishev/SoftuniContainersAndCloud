@@ -1,6 +1,10 @@
 # create repo in GitHub
 # upload the content of 03.TODO-App in the repo
 # Create new resource in Azure with Node 18 LTS, MongoDB + Compass, WestEurope, resource group etc
+# if isn't deploying for some reason, try on region Poland
 # after the app service is created, go to Configurations and add DATABASE_NAME as new application setting
 # wait for connection string to appear in the Configurations page
-# copy mongodb://.... and add it as value to new application setting: MONGODB_URL
+# copy mongodb://.... and add it as value to new application setting: DATABASE_URL
+# deploy the app from Deployment center
+# test it on your personal azure addres:
+https://your_app_name.azurewebsites.net/
