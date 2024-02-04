@@ -1,0 +1,28 @@
+# Sign in to docker azure
+docker login azure
+
+# create context
+docker context create aci nginxacicontext
+
+# list contexts
+docker context ls
+
+# use context
+docker context use nginxacicontext
+
+# run the container
+docker run -p 80:80 nginxdemos/hello
+
+# if error occurs
+docker logout
+
+# to view running containers
+docker ps
+
+docker stop <container name>
+docker rm <container name>
+
+docker context rm <context name>
+
+# if you want to leave azure
+docker logout
