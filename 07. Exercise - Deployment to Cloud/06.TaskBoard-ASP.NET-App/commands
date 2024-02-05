@@ -1,0 +1,4 @@
+# upload the project to github
+# create azure resources via web interface
+# there is a problem with SQLAzure Database when you are creating new Web App + Database:
+# "SQLAzure is not available for your selection of subscription and location"
