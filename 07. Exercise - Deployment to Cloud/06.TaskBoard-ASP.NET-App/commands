@@ -2,3 +2,22 @@
 # create azure resources via web interface
 # there is a problem with SQLAzure Database when you are creating new Web App + Database:
 # "SQLAzure is not available for your selection of subscription and location"
+# workaround:
+az provider register --namespace Microsoft.Sql
+
+# if az is not installed type in this in PowerShell:
+Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
+
+# add MultipleActiveResultSets=true to the connection string and rename it to DefaultConnection
+# ok, save
+# deployment center
+# choose the repo from GitHub
+# test the app on
+https://name_of_the_app.azurewebsites.net/
+
+# view log output for the container
+az container logs -g $resourceGroupName -n $containerName
+# not sure if this is working, because the container registry isn't created
+
+# to delete everything
+az group delete --name $resourceGroupName
