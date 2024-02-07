@@ -1,0 +1,15 @@
+# login to azure
+az login
+
+# create the tf file
+
+# initialize, format, validate, apply
+terraform init
+terraform fmt
+terraform validate
+terraform apply
+# yes
+
+# to delete
+terraform destroy
+# yes
