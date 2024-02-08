@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.90.0"
+      version = "3.89.0"
     }
   }
 }
@@ -23,7 +23,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 # create Linux App Service Plan
-resource "azurerm_service_plan" "plan" {
+resource "azurerm_service_plan" "asp" {
   name                = var.app_servive_plan_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -44,6 +44,8 @@ resource "azurerm_mssql_database" "database" {
   name           = var.sql_database_name
   server_id      = azurerm_mssql_server.sqlserver.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
+  max_size_gb    = 2
+  sku_name       = "S0"
   zone_redundant = false
 }
 
@@ -58,11 +60,11 @@ resource "azurerm_linux_web_app" "app" {
   name                = var.app_service_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  service_plan_id     = azurerm_service_plan.plan.id
+  service_plan_id     = azurerm_service_plan.asp.id
   connection_string {
     name  = "DefaultConnection"
     type  = "SQLAzure"
-    value = "Data Source=tcp:${var.sql_server_name},1433;Initial Catalog=${var.sql_database_name};User ID=${var.sql_admin_login};Password=${var.sql_admin_password};Trusted_Connection=False; MultipleActiveResultSets=True;"
+    value = "Data Source=tcp:${azurerm_mssql_server.sqlserver.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.database.name};User ID=${azurerm_mssql_server.sqlserver.administrator_login};Password=${azurerm_mssql_server.sqlserver.administrator_login_password};Trusted_Connection=False; MultipleActiveResultSets=True;"
   }
 
   site_config {
