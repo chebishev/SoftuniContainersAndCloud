@@ -6,6 +6,7 @@ terraform {
     }
   }
   # in order to add tfstate to the cloud, we need to add this
+  # you have to create the recource group and storage account
   # backend "azurerm" {
   #   resource_group_name = "StorageRG"
   #   storage_account_name = "taskboardstoragechibi"
