@@ -1,0 +1,37 @@
+name: "Terraform Test"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: "Terraform Test"
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+  
+    steps:
+    # checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+  
+    # install the latest version of terraform cli and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+  
+    # initialize a new or existing Terraform working directory by creating initial files, downloading remote state files and working with plugin modules
+    - name: Terraform Init
+      run: terraform init
+  
+    # checks all of the Terraform configuration files to verify syntactical correctness
+    - name: Terraform Format
+      run: terraform fmt -check
+  
+    # validate the Terraform configuration
+    - name: Terraform Validate
+      run: terraform validate

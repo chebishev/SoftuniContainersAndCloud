@@ -1,0 +1,15 @@
+# add repo with main.tf, terraform.tfvars and variables.tf
+# create workflow file
+# apply configuration workflow
+az ad sp create-for-rbac --name "UniqueName" --role contributor --scopes /subscriptions/subscription-id --sdk-auth
+# save the returned json, because you will need it in Github Secrets
+# add needed Secrets to Github
+# create plan and apply workflow file
+# test if the app is working
+https://task-board-chebishev.azurewebsites.net/
+
+# create storage account to store tsfile
+az storage account create --name uniquename --resource-group StorageRG --location westeurope --sku Standard_LRS --kind StorageV2
+
+# create container
+az storage container create -n taskboardcontainer --account-name uniquenamefromthepreviouscommand --auth-mode login

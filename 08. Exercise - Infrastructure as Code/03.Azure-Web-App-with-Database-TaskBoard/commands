@@ -3,5 +3,16 @@
 # create values.tfvars and add values for every variable
 # run the terraform apply with the -var-file=values.tfvars flag
 terraform apply -var-file=values.tfvars
+# yes
 
 # create outputs in new file: outputs.tf
+# the output looks like that:
+webapp_ips = "4.207.210.65,4.207.210.92,4.207.210.105,4.207.210.114,4.207.210.119,4.207.210.134,20.166.156.224,20.166.159.187,4.207.208.36,4.207.208.113,4.207.208.146,4.207.208.229,20.107.224.39"
+webapp_url = "task-board-chebishev.azurewebsites.net"
+
+# the app was accessible on
+https://task-board-chebishev.azurewebsites.net/
+
+# destroy app
+terraform destroy -var-file="values.tfvars"
+# yes
