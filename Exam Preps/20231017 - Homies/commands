@@ -1,0 +1,47 @@
+# create docker file
+# for .net apps must be automatically created and accurate
+# build image
+
+# test if the app is working (even without database)
+docker run -p 80:80 homies
+# access it on http://localhost:80
+
+# create docker-compose file
+
+# it asks for volume
+docker volume create sqldata
+# this is for local purposes
+
+# create resource_group
+az login
+az group create --name "chebishevhomiesrg" --location westeurope
+# create azure_container_registry
+az acr create --resource-group chebishevhomiesrg --name chebishevhomiescr --sku Basic
+
+# rename the image
+docker tag homies chebishevhomiescr.azurecr.io/homies
+
+# login to the azure registry
+az acr login --name chebishevhomiescr
+
+# push the image
+docker push chebishevhomiescr.azurecr.io/homies
+
+# check docker contexts:
+docker context ls
+
+# create azure context
+docker context create aci homiescontext
+
+# use azure context
+docker context use homiescontext
+
+# show docker contexts
+docker context show
+
+# add your username as domain name
+# in docker-compose - domainname: chebishev
+docker-compose up -d
+
+# the app must be accessible on
+chebishev.westeurope.azirecontainers.io
