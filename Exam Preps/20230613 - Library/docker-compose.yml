@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server
+    ports:
+            - 1433:1433
+    environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=yourStrongPassword12#
+    volumes:
+      - sqldata:/var/opt/mssql
+    deploy:
+      resources:
+        reservations:
+          cpus: '2.0'
+          memory: 2G
+  
+  web-app:
+    container_name: web-app
+    build: 
+      dockerfile: ./Dockerfile
+    image: chebishevlibrarycr.azurecr.io/library
+    domainname: chebishev
+    ports:
+      - 80:80
+    restart: always
+
+volumes:
+  sqldata:
+    driver: azure_file # Placeholder for the actual Azure volume driver you're using
+    driver_opts:
+      share_name: "sql-volume"
+      storage_account_name: "librarystorageacc"

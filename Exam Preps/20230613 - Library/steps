@@ -1,0 +1,96 @@
+# build Dockerfile from the project in VisualStudio (open the "sln" file and use Add->Docker support)
+# check if the generated Dockerfile matches the assignment
+# build the image
+docker build -t "name_of_the_image" .
+
+# check if the image is working
+docker run -p port:port name_of_the_image 
+
+# optional
+# if there is a problem you can create custom network and connect the container with database
+# and to check if the app is working properly
+docker run -d --network custom_network_name -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrongPassword12#" -p 1433:1433 -d mcr.microsoft.com/mssql/server
+# add your image to the network with proper values for the ports:
+docker run -d --network custom_network_name -p port:port name_of_the_image
+# check if the app is working
+localhost:port
+
+# create docker-compose
+# make yourself sure that the database service is named after the Server in ConnectionString
+# (you can find it in appsettings.json in the .net project)
+# example:
+"ConnectionStrings": {
+    "DefaultConnection": "Server=sqlserver;Database=Library;User Id=sa;Password=yourStrongPassword12#;MultipleActiveResultSets=true;"
+  },
+# Clearly the name of the Server is sqlserver, so that would be the name of the service
+
+# keep in mind that restart policy should be "restart: always" (if you have problems with slow starting of the database)
+# if everything is working fine locally we are adding the deployment properties to the docker-compose file
+
+# important settings
+# deploy:
+#   resources:
+#     reservations:
+#       cpus: '2.0'
+#       memory: 2G
+
+# volumes:
+#     sqldata:
+#     driver: azure_file # Placeholder for the actual Azure volume driver you're using
+#     driver_opts:
+#         share_name: "sql-volume"
+#         storage_account_name: "librarystorageacc"
+
+# for proper using of docker with azure:
+docker logout
+
+docker login azure
+
+# login to azure
+az login
+
+# create resource group
+az group create --name chebishevlibraryrg --location westeurope
+
+# create registry
+az acr create --resource-group chebishevlibraryrg --name chebishevlibrarycr --sku Basic
+# you can check if it is created in your azure portal
+
+# from the resulting json copy your loginServer in order to create image tag:
+# in this case:
+chebishevlibrarycr.azurecr.io
+# and the tagged image will be named
+chebishevlibrarycr.azurecr.io/library
+
+# to change the tag (it requires the image to exist):
+docker tag library chebishevlibrarycr.azurecr.io/library
+# or just build the image with this tag instead:
+docker build -t chebishevlibrarycr.azurecr.io/library .
+# !!! CHANGE the image name in docker-compose to "chebishevlibrarycr.azurecr.io/library"
+
+
+#sign in with the previously created container registry as username
+az acr login --name chebishevlibrarycr
+# expect "Login Succeeded" message
+
+# push the image to the registry
+docker push chebishevlibrarycr.azurecr.io/library
+# for confirmation you can check it in the azure portal
+
+# create azure context and at the prompt attach it to the existing resource group that you created (chebishevlibraryrg)
+docker context create aci librarycontext
+# expect 'Successfully created aci context "librarycontext"'
+
+# switch to the new context
+docker context use librarycontext
+# expect 'Current context is now "librarycontext"'
+# and just to be sure
+docker context show
+
+# do not forget to add domainname option to the docker-compose with your username
+# run the app (deploy the app)
+docker-compose up -d
+
+# if everything is working properly you have access to your uploaded app on:
+chebishev.westeurope.azurecontainer.io
+# it can be found on resource group -> container instances -> FQDN
