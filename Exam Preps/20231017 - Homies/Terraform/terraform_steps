@@ -1,0 +1,26 @@
+task 2:
+
+# add the files to github
+
+# add terraform folder (maybe it is not needed, it will separate terraform files from the project files)
+# main.tf in it:
+# terraform
+# provider
+# create resource group - azurerm_resource_group (name, location)
+# create service plan - azurerm_service_plan (name, resource_group_name, location, os_type, sku_name)
+# create linux web app - azurerm_linux_web_app (name, resource_group_name, location, service_plan_id, connection_string, site_config(application_stack))
+# create sqlserver - azure_mssql_server (name, resource_group_name, location, version, administrator_login, administrator_login_password)
+# create sqldatabase = azurerm_mssql_database (name, server_id, collation, license_type, max_size_gb, sku_name, zone_redundant)
+# create firewall rule = azurerm_firewall_rule (name, server_id, start_ip_address, end_ip_address)
+# create repo - azurerm_app_service_source_control (app_id, repo_url, branch, use_manual_integration)
+terraform init
+terraform fmt
+terraform validate
+# separate the logic into files (variables.tf, values.tfvars, output.tf)
+# add the values names in variables.tf
+# add values to the variables in values.tfvars (every variable from variables.tf = string value from main.tf)
+# change the values in main.tf with the values from values.tfvars (var.variable_name) instead of a string
+# validate again to check if there are errors
+(terraform plan)
+terraform apply -var-file="values.tfvars"
+ 
