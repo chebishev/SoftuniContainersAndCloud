@@ -15,6 +15,7 @@ docker volume create sqldata
 # create resource_group
 az login
 az group create --name "chebishevhomiesrg" --location westeurope
+
 # create azure_container_registry
 az acr create --resource-group chebishevhomiesrg --name chebishevhomiescr --sku Basic
 
