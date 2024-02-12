@@ -1,3 +1,13 @@
+variable "prefix" {
+  type        = string
+  description = "The prefix used for all resources in this example"
+}
+
+variable "app_name" {
+  type        = string
+  description = "The name of the application"
+}
+
 variable "resource_group_name" {
   type        = string
   description = "Resource group name in Azure"
@@ -23,11 +33,6 @@ variable "sql_server_name" {
   description = "SQL server name in Azure"
 }
 
-variable "sql_database_name" {
-  type        = string
-  description = "SQL database name in Azure"
-}
-
 variable "sql_admin_login" {
   type        = string
   description = "value of SQL administrator login"
@@ -36,6 +41,11 @@ variable "sql_admin_login" {
 variable "sql_admin_password" {
   type        = string
   description = "value of SQL administrator password"
+}
+
+variable "sql_database_name" {
+  type        = string
+  description = "SQL database name in Azure"
 }
 
 variable "firewall_rule_name" {
