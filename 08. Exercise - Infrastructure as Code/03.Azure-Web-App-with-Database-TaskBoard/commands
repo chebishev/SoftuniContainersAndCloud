@@ -2,7 +2,7 @@
 # create variables.tf and add type and description for every variable
 # create values.tfvars and add values for every variable
 # run the terraform apply with the -var-file=values.tfvars flag
-terraform apply -var-file=values.tfvars
+terraform apply -var-file="values.tfvars"
 # yes
 
 # create outputs in new file: outputs.tf

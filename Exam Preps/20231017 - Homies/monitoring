@@ -1,0 +1,30 @@
+# prometheus + blackbox exporter
+# run blackbox in docker
+docker run -d -p 9115:9115 quay.io/prometheus/blackbox-exporter
+# add new yml file: prometheus-exam.yml
+# fill it with the needed data (in this case we change only the URL)
+# copy the file directly to prometheus folder
+# run it (it needs a separate terminal instance)
+prometheus --config.file prometheus-exam.yml
+# or prometheus.exe
+# it works on 
+localhost:9090
+
+# for alerting create another yml file: alertmanager-exam.yml
+# go to https://webhook.site and get your unique url, it will be used in the alertmanager-exam.yml
+# from alertmanager folder run (second separate terminal instance)
+alertmanager.exe --config.file alertmanager-exam.yml
+# this alert manager is working on port 9093
+localhost:9093
+# create alarm in prometheus in new yml file like alert-rules-exam.yml
+# add the prometheus exam file add: (evaluation_interval, rule_files, alerting)
+
+# setup Graphana (need install that works on localhost:3000) and don't stop the running prometheus instance
+# add new connection - Prometheus
+# add new data source - localhost:9090
+# save and test
+# new dashboard
+# choose Histogram from Visualizations
+# metric - probe_http_duration_seconds
+# save the dashboard
+# the dashboard could be exported to json file. Save it!
