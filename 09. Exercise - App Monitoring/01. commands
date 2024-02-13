@@ -1,0 +1,9 @@
+npm install
+npm start
+
+# install additional client library
+stop the app (ctrl+c)
+npm install prom-client
+
+# the new package should be added in package.json
+# import the library in mvc-controller.js
