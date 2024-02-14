@@ -1,0 +1,17 @@
+# nothing fancy here
+# add the projet to github
+# go to azure and create new webapp + database
+# keep in mind that the region can give you problems (It worked with Poland)
+# copy the database name that mongodb generates (examprep-chebishev-database)
+# Do not forget to add the environment variables:
+DATABASE_NAME, DATABASE_URL (get it from the generated connection string in the App configuration panel)
+# deploy the project from github from the app deploy center
+# that's it
+# the app was accessible here:
+https://examprep-chebishev.azurewebsites.net/
+# so I am deleting the resource group
+az group delete --name examprep-chebishev
+# output:
+PS C:\Users\hp\SoftuniContainersAndCloud> az group delete --name chebishev-task1-rg
+Are you sure you want to perform this operation? (y/n): y
+ | Running ..
