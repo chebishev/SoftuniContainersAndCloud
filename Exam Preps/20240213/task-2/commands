@@ -1,0 +1,7 @@
+# add the files to a github repo
+# create Terraform files for main, variables, outputs, values
+terraform init
+terraform fmt
+terraform validate
+terraform apply -var-file="values.tfvars"
+# check if the app is working and make monitoring to it or the other one (from task 1)
