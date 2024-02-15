@@ -400,3 +400,11 @@ FodyWeavers.xsd
 # terraform
 *.exe
 .terraform/
+data/silences
+data/nflog
+data/lock
+data/wal/000001
+data/wal/000002
+data/wal/000003
+data/nflog
+data/silences

@@ -45,4 +45,4 @@ docker context show
 docker-compose up -d
 
 # the app must be accessible on
-chebishev.westeurope.azirecontainers.io
+chebishev.westeurope.azurecontainers.io

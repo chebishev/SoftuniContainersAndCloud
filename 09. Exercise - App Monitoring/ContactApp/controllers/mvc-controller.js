@@ -1,4 +1,35 @@
+const client = require('prom-client');
+
+const register = new client.Registry();
+
+client.collectDefaultMetrics({
+  app: 'node-application-monitoring-app',
+  prefix: 'node_',
+  timeout: 10000,
+  gcDurationBuckets: [0.001, 0.01, 0.1, 1, 2, 5],
+  register
+});
+
+const httpRequestTimer = new client.Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Duration of HTTP requests in seconds',
+  labelNames: ['method', 'route', 'code'],
+  buckets: [0.01, 0.03, 0.05, 0.07, 0.1, 0.3, 0.5, 0.7, 1]
+});
+
+register.registerMetric(httpRequestTimer);
+
 function setup(app, data) {
+  app.get('/metrics', async (req, res) => {
+    const end = httpRequestTimer.startTimer();
+    const route = req.route.path;
+
+    res.setHeader('Content-Type', register.contentType);
+    res.send(await register.metrics());
+
+    end({ route, code: res.StatusCode, method: req.method });
+  }); 
+  
   app.get('/', function(req, res) {
     let contacts = data.getContacts();
     let model = { contacts };
