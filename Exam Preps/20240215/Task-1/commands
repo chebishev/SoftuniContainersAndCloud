@@ -1,0 +1,22 @@
+# create docker file for frontend
+# build the image
+docker build -t frontend .
+
+# create docker file for backend
+# build the image
+docker build -t backend .
+
+# for local testing create network
+# run all containers in the same network
+# backend must be last in order to connect to database
+
+# the app is working on port 3000
+http://localhost:3000
+
+# for mongodb: MONGO_INITDB_ROOT_USERNAME and MONGO_INITDB_ROOT_PASSWORD must be set
+# .env file?
+
+# retag the frontend and backend services
+# push them to dockerhub
+
+# build docker-compose
