@@ -8,7 +8,7 @@ groups:
           severity: warning
         annotations:
           summary: "Connection took more than 2.5 milliseconds"
-  
+
   - name: azure-dotnet-application-monitoring
     rules:
       - alert: HighHttpRequestRate
@@ -18,8 +18,8 @@ groups:
           severity: warning
         annotations:
           summary: "High HTTP request rate in .NET application"
-          description: "The HTTP request rate for the .NET application deployed on Azure ('your-app-name') has exceeded 100 requests per second over the last 5 minutes. Investigate for potential DDoS or prepare to scale resources."
-  
+          description: "The HTTP request rate for the .NET application deployed on Azure ('url-shortener') has exceeded 100 requests per second over the last 5 minutes. Investigate for potential DDoS or prepare to scale resources."
+
   - name: http-status-alerts
     rules:
       - alert: HttpStatusCodeNot200

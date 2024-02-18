@@ -1,0 +1,35 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=max
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    networks:
+      - shopping_list
+    volumes:
+      - data:/data/db
+    image: mongo
+  backend:
+    networks:
+      - shopping_list
+    ports:
+      - 80:80
+    volumes:
+      - logs:/logs
+      - node_modules:/node_modules
+    image: chebishev/shopping-list-backend
+  frontend:
+    networks:
+      - shopping_list
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/src
+    image: chebishev/shopping-list-frontend
+networks:
+  shopping_list:
+volumes:
+  data:
+  logs:
+  node_modules:
